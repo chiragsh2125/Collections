@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
-const PORT= process.env.PORT||5000;
+const PORT= process.env.PORT || 4000;
 import postRoutes from './routes/posts.js';
 
 const app = express();
@@ -28,3 +28,7 @@ db.once("open", () => {
 app.listen(PORT, () => {
   console.log(`Serving on port ${PORT}`);
 })
+
+if(process.env.NODE_ENV ==='production'){
+  app.use(express.static('../client/build'))
+}
